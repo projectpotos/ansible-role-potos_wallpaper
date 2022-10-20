@@ -1,0 +1,18 @@
+--
+
+dependencies: []
+
+galaxy_info:
+  role_name: 'potos_wallpaper'
+  author: 'Adfinis AG'
+  description: 'This role is used to set the wallpaper of potos clients'
+  company: 'Adfinis AG'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '2.12.0'
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - "potos"
