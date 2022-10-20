@@ -1,0 +1,20 @@
+---
+
+argument_specs:
+  main:
+    short_description: Role to manage wallpapers of Potos Linux Clients.
+    options:
+      potos_wallpaper_default_name:
+        description:
+          - Name of the default wallpaper file.
+        type: str
+        required: no
+        default: 'warty-final-ubuntu.png'
+      potos_wallpaper_images:
+        description:
+          - List of files to be found under 'potos_wallpaper' to be added as
+            background, first element is set as default.
+        type: list
+        elements: str
+        required: no
+        default: []
