@@ -5,7 +5,7 @@
   gather_facts: no
 
   tasks:
-  - name: check if some background exists
+  - name: check if some wallpapers exists
     ansible.builtin.shell:
       cmd: ls -p /usr/share/backgrounds | grep -v / | wc -l
     register: out
