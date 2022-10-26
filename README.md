@@ -1,6 +1,6 @@
 # Ansible Role - Potos Wallpaper
 
-A role to set a custom wallpaper
+Role to manage wallpapers of Potos Linux Clients.
 
 [![Test](https://github.com/projectpotos/ansible-role-potos_wallpaper/actions/workflows/test.yml/badge.svg)](https://github.com/projectpotos/ansible-role-potos_wallpaper/actions/workflows/test.yml)
 
