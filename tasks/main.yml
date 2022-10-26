@@ -7,9 +7,18 @@
     - '{{ ansible_distribution }}.yml'
     - '{{ ansible_os_family }}.yml'
 
+- name: Create background dir
+  ansible.builtin.file:
+    path: '/usr/share/backgrounds'
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
 - name: Get Wallpapers to remove
-  ansible.builtin.shell:
-    cmd: 'ls -p /usr/share/backgrounds | grep -v'
+  ansible.builtin.find:
+    paths: /usr/share/backgrounds
+    file_type: file
   register: potos_wallpaper_backgrounds
   changed_when: false
 
@@ -17,7 +26,7 @@
   ansible.builtin.file:
     path: '/usr/share/backgrounds/{{ item }}'
     state: absent
-  loop: '{{ potos_wallpaper_backgrounds | difference(potos_wallpaper_images) }}'
+  loop: '{{ (potos_wallpaper_backgrounds.files | map(attribute="path") | list) | difference(potos_wallpaper_images) }}'
 
 - name: Install custom default background
   ansible.builtin.copy:
@@ -27,8 +36,9 @@
     group: root
     mode: '0755'
   when: potos_wallpaper_default_name is defined and
-        potos_wallpaper_image is iterable and
-        potos_wallpaper is not string and
+        potos_wallpaper_images is defined and
+        potos_wallpaper_images is iterable and
+        potos_wallpaper_images is not string and
         (potos_wallpaper_images | length > 0)
 
 - name: Install custom backgrounds
@@ -39,7 +49,7 @@
     group: root
     mode: '0755'
   loop: '{{ potos_wallpaper_images[1:] | default([]) }}'
-  when: potos_wallpaper_default_name is defined and
-        potos_wallpaper_image is iterable and
-        potos_wallpaper is not string and
+  when: potos_wallpaper_images is defined and
+        potos_wallpaper_images is iterable and
+        potos_wallpaper_images is not string and
         (potos_wallpaper_images | length > 0)
