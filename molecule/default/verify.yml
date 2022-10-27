@@ -11,4 +11,4 @@
     register: out
     changed_when: false
     failed_when:
-      - out.stdout != '0'
+      - out.stdout == '0'

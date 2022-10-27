@@ -3,6 +3,9 @@
 - name: Converge
   hosts: all
   gather_facts: yes
+  vars:
+    potos_wallpaper_images:
+      - "potos-wallpaper_test.png"
   tasks:
     - name: run role
       ansible.builtin.include_role:
