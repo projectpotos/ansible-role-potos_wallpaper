@@ -23,8 +23,13 @@
   changed_when: false
 
 - name: Install wallpapers
+  when:
+    - potos_wallpaper_default_name is defined
+    - potos_wallpaper_images is defined
+    - potos_wallpaper_images is iterable
+    - potos_wallpaper_images is not string
+    - (potos_wallpaper_images | length > 0)
   block:
-
     - name: remove Wallpapers
       ansible.builtin.file:
         path: '/usr/share/backgrounds/{{ item }}'
@@ -32,7 +37,7 @@
       loop: '{{
           (potos_wallpaper_backgrounds.files |
           map(attribute="path") |
-          map("regex_replace","^\/usr\/share\/backgrounds\/(.*)","\1") |
+          map("regex_replace", "^\/usr\/share\/backgrounds\/(.*)", "\1") |
           list) |
           difference(potos_wallpaper_images[1:]) |
           difference([potos_wallpaper_default_name])
@@ -54,9 +59,3 @@
         group: root
         mode: '0755'
       loop: '{{ potos_wallpaper_images[1:] | default([]) }}'
-
-  when: potos_wallpaper_default_name is defined and
-        potos_wallpaper_images is defined and
-        potos_wallpaper_images is iterable and
-        potos_wallpaper_images is not string and
-        (potos_wallpaper_images | length > 0)
