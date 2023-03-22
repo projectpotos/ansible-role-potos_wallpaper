@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
+<wallpapers>
+  <wallpaper>
+    <name>{% if potos_wallpaper_images[0] is string%}{{ potos_wallpaper_images[0] }}{% else %}{{ potos_wallpaper_images[0].name | default ('Wallpaper') }}{% endif %}</name>
+    <filename>/usr/share/backgrounds/warty-final-ubuntu.png</filename>
+    <options>{% if potos_wallpaper_images[0] is string%}zoom{% else %}{{ potos_wallpaper_images[0].options }}{% endif %}</options>
+    <pcolor>{% if potos_wallpaper_images[0] is string%}#161b21{% else %}{{ potos_wallpaper_images[0].pcolor | default('#161b21') }}{% endif %}</pcolor>
+    <scolor>{% if potos_wallpaper_images[0] is string%}#161b21{% else %}{{ potos_wallpaper_images[0].scolor | default('#161b21') }}{% endif %}</scolor>
+    <shade_type>{% if potos_wallpaper_images[0] is string%}solid{% else %}{{ potos_wallpaper_images[0].shade_type | default('solid') }}{% endif %}</shade_type>
+  </wallpaper>
+{% for bg in potos_wallpaper_images[1:] | default([]) %}
+  <wallpaper>
+    <name>{% if bg is string%}{{ bg }}{% else %}{{ bg.name | default ('Wallpaper') }}{% endif %}</name>
+    <filename>/usr/share/backgrounds/{% if bg is string%}{{ bg }}{% else %}{{ bg.filename }}{% endif %}</filename>
+    <options>{% if bg is string%}zoom{% else %}{{ bg.options }}{% endif %}</options>
+    <pcolor>{% if bg is string%}#161b21{% else %}{{ bg.pcolor | default('#161b21') }}{% endif %}</pcolor>
+    <scolor>{% if bg is string%}#161b21{% else %}{{ bg.scolor | default('#161b21') }}{% endif %}</scolor>
+    <shade_type>{% if bg is string%}solid{% else %}{{ bg.shade_type | default('solid') }}{% endif %}</shade_type>
+  </wallpaper>
+{% endfor %}
+</wallpapers>

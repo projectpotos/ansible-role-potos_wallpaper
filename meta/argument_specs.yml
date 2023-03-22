@@ -8,7 +8,7 @@ argument_specs:
         description:
           - Name of the default wallpaper file.
         type: str
-        required: no
+        required: false
         default: 'warty-final-ubuntu.png'
       potos_wallpaper_images:
         description:
@@ -16,5 +16,5 @@ argument_specs:
             background, first element is set as default.
         type: list
         elements: str
-        required: no
+        required: false
         default: []

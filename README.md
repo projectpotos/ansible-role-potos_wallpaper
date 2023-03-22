@@ -31,6 +31,24 @@ The default variables are defined in [defaults/main.yml](./defaults/main.yml):
 # first element is set as default
 potos_wallpaper_images: []
 ```
+### Example
+```yaml
+potos_wallpaper_images:
+  - name: "Potos"
+    filename: "potos.jpg"
+    options: "zoom"
+    pcolor: "#161b21"
+    scolor: "#161b21"
+    shade_type: "solid"
+```
+| variable   | Possible values                                                           | Description                                                             |
+|------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| name       |                                                                           | How the wallpaper is named to the user                                  |
+| filename   |                                                                           |                                                                         |
+| options    | "none", "wallpaper", "centered", "scaled", "stretched", "zoom", "spanned" | Determines how the image is rendered                                    |
+| pcolor     | any hex rgb value e.g. #161b21                                            | Left or top color when drawing gradients, or the solid color.           |
+| scolor     | any hex rgb value e.g. #161b21                                            | Right or bottom color when drawing gradients, not used for solid color. |
+| shade_type | "horizontal", "vertical", and "solid"                                     | How to shade the background color.                                      |
 
 Another option is to use `ansible-doc` to read the argument specification:
 
