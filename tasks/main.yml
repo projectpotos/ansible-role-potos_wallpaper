@@ -39,13 +39,13 @@
           map(attribute="path") |
           map("regex_replace", "^\/usr\/share\/backgrounds\/(.*)", "\1") |
           list) |
-          difference(potos_wallpaper_images[1:]) |
+          difference(potos_wallpaper_images[1:] | map(attribute="filename" )) |
           difference([potos_wallpaper_default_name])
           }}'
 
     - name: Install custom default background
       ansible.builtin.copy:
-        src: 'potos_wallpaper/{{ potos_wallpaper_images[0] }}'
+        src: 'potos_wallpaper/{% if potos_wallpaper_images[0] is string%}{{ potos_wallpaper_images[0] }}{% else %}{{ potos_wallpaper_images[0].filename }}{% endif %}'
         dest: '/usr/share/backgrounds/{{ potos_wallpaper_default_name }}'
         owner: root
         group: root
@@ -53,8 +53,8 @@
 
     - name: Install custom backgrounds
       ansible.builtin.copy:
-        src: 'potos_wallpaper/{{ item }}'
-        dest: '/usr/share/backgrounds/{{ item | basename }}'
+        src: 'potos_wallpaper/{% if item is string%}{{ item }}{% else %}{{ item.filename }}{% endif %}'
+        dest: '/usr/share/backgrounds/{% if item is string%}{{ item | basename }}{% else %}{{ item.filename | basename }}{% endif %}'
         owner: root
         group: root
         mode: '0755'
